@@ -1,7 +1,8 @@
 ## inversions_breakpoints_simulation
 ### Contains the scripts for simulating breakpoints and permutations
 
-Produces random breakpoints along the sequence.**
+Produces random breakpoints along the sequence.
+
 ```breakpoint_generator.py```
 
 Produces random breakpoints in the strata boundaries
