@@ -1,0 +1,78 @@
+blocksizes <- read.table("/Users/homa/breakpoints_16blocks")
+barplot(blocksizes$V2, ylim = c(0,1000))
+
+ostrich_chicken_synt_blocks <- read.table("~/Documents/rearrangement_manuscript/ostrich_chicken_genes_Z/blocks.txt")
+hist(ostrich_chicken_synt_blocks$V4, breaks = seq(1,82000000,1000000))
+block_length <- append(ostrich_chicken_synt_blocks$V4, ostrich_chicken_synt_blocks$V8)
+hist(block_length, breaks = seq(1,82000000,1000000))
+synt_blocks <- read.table("~/Documents/rearrangement_manuscript/birds_lizard_Z/blocks.txt")
+block_length_birds_lizard <- append(synt_blocks$V4,synt_blocks$V8)
+block_length_birds_lizard <- append(block_length_birds_lizard, synt_blocks$V12)
+block_length_birds_lizard <- append(block_length_birds_lizard, synt_blocks$V16)
+block_length_birds_lizard <- append(block_length_birds_lizard, synt_blocks$V20)
+block_length_birds_lizard <- append(block_length_birds_lizard, synt_blocks$V24)
+block_length_birds_lizard <- append(block_length_birds_lizard, synt_blocks$V28)
+block_length_birds_lizard <- sort(block_length_birds_lizard, decreasing = TRUE)
+hist(block_length_birds_lizard, breaks = seq(1,20000000,500000))
+hist(block_length_birds_lizard, breaks=20)
+fitdist(block_length_birds_lizard)
+descdist(block_length_birds_lizard, discrete = FALSE)
+install.packages("vcd")
+library(vcd)
+library(MASS)
+fit1 <- fitdistr(block_length_birds_lizard, "exponential")
+ks.test(block_length_birds_lizard, "pexp", fit1$estimate)
+hist(block_length_birds_lizard, freq = FALSE, breaks = 100, xlim = c(0, quantile(block_length_birds_lizard, 0.99)))
+curve(dexp(x, rate = fit1$estimate), col = "red", add = TRUE)
+
+fit1 <- fitdistr(ostrich_chicken_synt_blocks$V4, "exponential")
+ks.test(ostrich_chicken_synt_blocks$V4, "pexp", fit1$estimate)
+hist(ostrich_chicken_synt_blocks$V4, freq = FALSE, breaks = 100, xlim = c(0, quantile(ostrich_chicken_synt_blocks$V4, 0.99)))
+curve(dexp(x, rate = fit1$estimate), col = "red", add = TRUE)
+
+blocksizes <- read.table("/Users/homa/breakpoints_16blocks")
+fit2 <- fitdistr(blocksizes$V2, "exponential")
+ks.test(blocksizes$V2, "pexp", fit2$estimate)
+
+strata_solutions <- read.table("/Users/homa/strata_solutions")
+strata_traces <- read.table("/Users/homa/strata_traces_6")
+median(sort(as.numeric(strata_solutions$V1)))
+median(sort(as.numeric(strata_traces$V1)))
+
+strata_strata_solutions <- read.table("/Users/homa/strata_strata_solutions")
+strata_strata_traces <- read.table("/Users/homa/strata_strata_traces_6")
+median(sort(as.numeric(strata_strata_solutions$V1)))
+median(sort(as.numeric(strata_strata_traces$V1)))
+hist(sort(as.numeric(strata_strata_solutions$V1)))
+
+median(sort(strata_strata_solutions$V1[!is.element(strata_strata_solutions$V1, 0)]))
+median(sort(strata_strata_traces$V1[!is.element(strata_strata_traces$V1, 0)]))
+
+hist(strata_strata_solutions$V1[1:983]/strata_solutions$V1, breaks = 20)
+
+solutions <- read.table("/Users/homa/free_solutions")
+traces <- read.table("/Users/homa/free_traces_6")
+median(sort(as.numeric(solutions$V1)))
+median(sort(as.numeric(traces$V1)))
+
+free_strata_solutions <- read.table("/Users/homa/free_strata_solutions")
+free_strata_traces <- read.table("/Users/homa/free_strata_traces_6")
+median(sort(as.numeric(free_strata_solutions$V1)))
+median(sort(as.numeric(free_strata_traces$V1)))
+median(sort(free_strata_solutions$V1[!is.element(free_strata_solutions$V1, 0)]))
+median(sort(free_strata_traces$V1[!is.element(free_strata_traces$V1, 0)]))
+hist(sort(as.numeric(free_strata_solutions$V1)))
+
+hist(free_strata_solutions$V1[1:969]/solutions$V1, breaks = 20)
+
+observed_value_for_XY <- 28/346
+
+library(plotrix)
+l <- list(free_strata_solutions$V1[1:969]/solutions$V1,strata_strata_solutions$V1[1:983]/strata_solutions$V1)
+multhist(l, axes=FALSE, ylim=c(0,1000))
+axis(2, at=seq(0,1000,200))
+
+wilcox.test(sort(as.numeric(solutions$V1)), sort(as.numeric(strata_solutions$V1)))
+wilcox.test(sort(free_strata_solutions$V1[!is.element(free_strata_solutions$V1, 0)]),sort(strata_strata_solutions$V1[!is.element(strata_strata_solutions$V1, 0)]) )
+wilcox.test(sort(as.numeric(traces$V1)),sort(as.numeric(strata_traces$V1)))
+wilcox.test(sort(free_strata_traces$V1[!is.element(free_strata_traces$V1, 0)]),sort(strata_strata_traces$V1[!is.element(strata_strata_traces$V1, 0)]) )

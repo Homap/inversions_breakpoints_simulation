@@ -1,8 +1,9 @@
 ## inversions_breakpoints_simulation
 ### Contains the scripts for simulating breakpoints and permutations
 
-Please download [baobabLUNA](http://doua.prabi.fr/software/luna).
-And place the jar file in the same repository. 
+The jar file, baobab-luna.jar, used to obtain the solution space of sorting by reversals 
+
+is downloaded from [baobabLUNA](http://doua.prabi.fr/software/luna).
 
 Produces random breakpoints along the sequence.
 
