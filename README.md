@@ -1,4 +1,4 @@
-inversions_breakpoints_simulation
+inversions_breakpoints_simulation \n
 Contains the scripts for simulating breakpoints and permutations
 
 Produces random breakpoints along the sequence. Used 
