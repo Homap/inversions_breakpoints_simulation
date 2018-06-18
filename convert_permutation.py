@@ -7,7 +7,7 @@ import sys
 # java -classpath baobab-luna.jar baobab.exec.trace.analyzeTraces -o -3,2,1,-4
 
 # The goal of this script is to write one permutation according to the other. 
-# This is necessary to use Baobabluna to get all the traces of a permutaion because .... . 
+# This is necessary to use Baobabluna to get all the traces of a permutaion. 
 
 permutation1 = []
 sign1 = []
